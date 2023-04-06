@@ -1,5 +1,6 @@
 #!/bin/bash
-GPU=$1
+NGPU=$1
 MODE=$2
-CUDA_VISIBLE_DEVICES=$GPU python main_qa.py \
+python main_qa.py \
+	--ngpu $NGPU \
 	--mode $MODE

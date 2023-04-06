@@ -6,12 +6,12 @@ import torch.nn.functional as F
 
 
 class MultipleChoiceLoss(nn.Module):
-
-    def __init__(self, num_option=5, margin=1, size_average=True):
+    def __init__(self, device, num_option=5, margin=1, size_average=True):
         super(MultipleChoiceLoss, self).__init__()
         self.margin = margin
         self.num_option = num_option
         self.size_average = size_average
+        self.device = device
 
     # score is N x C
 
@@ -20,11 +20,11 @@ class MultipleChoiceLoss(nn.Module):
         C = score.size(1)
         assert self.num_option == C
 
-        loss = torch.tensor(0.0).cuda()
-        zero = torch.tensor(0.0).cuda()
+        loss = torch.tensor(0.0).cuda(self.device)
+        zero = torch.tensor(0.0).cuda(self.device)
 
         cnt = 0
-        #print(N,C)
+        # print(N,C)
         for b in range(N):
             # loop over incorrect answer, check if correct answer's score larger than a margin
             c0 = target[b]
