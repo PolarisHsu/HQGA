@@ -9,7 +9,7 @@ import eval_oe
 
 def main(args):
     n_gpu = args.ngpu
-    print(f"{n_gpu} GPU(s) to use.")
+    print(f"{n_gpu} GPU{'' if n_gpu==1 else 's'} to use.")
     mode = args.mode
     if mode == "train":
         batch_size = 32
